@@ -246,8 +246,8 @@ function get_user_wise_total_order($connect)
 	$query = '
 	SELECT sum(inventory_order.inventory_order_total) as order_total, 
 	SUM(CASE WHEN inventory_order.payment_status = "cash" THEN inventory_order.inventory_order_total ELSE 0 END) AS cash_order_total, 
-	SUM(CASE WHEN inventory_order.payment_status = "cradit" THEN inventory_order.inventory_order_total ELSE 0 END) AS credit_order_total, 
-	user_details.user_name 
+	SUM(CASE WHEN inventory_order.payment_status = "credit" THEN inventory_order.inventory_order_total ELSE 0 END) AS credit_order_total, 
+	user_details.user_name
 	FROM inventory_order 
 	INNER JOIN user_details ON user_details.user_id = inventory_order.user_id 
 	WHERE inventory_order.inventory_order_status = "active" GROUP BY inventory_order.user_id
@@ -276,7 +276,7 @@ function get_user_wise_total_order($connect)
 	{
 		$output .= '
 		<tr>
-			<td>'.$row['user_name'].'</td>
+			<td>'.$row["user_name"].'</td>
 			<td align="right">$ '.$row["order_total"].'</td>
 			<td align="right">$ '.$row["cash_order_total"].'</td>
 			<td align="right">$ '.$row["credit_order_total"].'</td>

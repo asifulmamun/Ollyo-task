@@ -29,3 +29,10 @@
 - Fix: fix the header file user name, session name was spelling mistake for this reason session not set, and header greating name was the error.
 - Fix: index page almost completed, showing all perfectly as known by me
 
+#### Start again 11:46 PM
+- Domain addon to a hosting and subdomain create https://olly.asifulmamun.info
+- Database connection-make backup file for git ignore and the main connection file added to gitignore for avoid the hosting conflict
+- .gitignore file added
+
+
+

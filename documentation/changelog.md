@@ -22,4 +22,7 @@
 ### Login error solving
 - I think first solve the login error and comment the sesstion type and user_name cause, i need to access the home page with login not guest, issue one and two solved but I need properly so, randomly solving the login issue which is not mention the issue list, login error are showing, and solving for best practice with proper session data and menu visible.
 
+--------- after 30 mins work then ready to for travel Dhaka not sure would it possible to complete thoses task or not -------
+
+### Start again while traveling train
 

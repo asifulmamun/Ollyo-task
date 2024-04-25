@@ -29,44 +29,41 @@ if(isset($_POST["login"]))
 	$statement->execute();
 	$result = $statement->get_result();
 	$count = $result->num_rows;
-
-	
-	
 	// $count = $statement->rowCount();
-	echo $count;
+	// echo $count;
 
 
 
-	// if($count > 0)
-	// {
-	// 	$result = $statement->fetchAll();
-	// 	foreach($result as $row)
-	// 	{
-	// 		if($row['user_status'] == 'Active')
-	// 		{
-	// 			if(password_verify($_POST["user_password"], $row["user_password"]))
-	// 			{
+	if($count > 0)
+	{
+		$result = $statement->fetchAll();
+		foreach($result as $row)
+		{
+			if($row['user_status'] == 'Active')
+			{
+				if(password_verify($_POST["user_password"], $row["user_password"]))
+				{
 				
-	// 				$_SESSION['type'] = $row['user_type'];
-	// 				$_SESSION['usar_id'] = $row['user_id'];
-	// 				$_SESSION['usar_name'] = $row['user_name'];
-	// 				header("location:index.php");
-	// 			}
-	// 			else
-	// 			{
-	// 				$message = "<label>Wrong Password</label>";
-	// 			}
-	// 		}
-	// 		else
-	// 		{
-	// 			$message = "<label>Your account is disabled, Contact Master</label>";
-	// 		}
-	// 	}
-	// }
-	// else
-	// {
-	// 	$message = "<label>Wrong Email Address</labe>";
-	// }
+					$_SESSION['type'] = $row['user_type'];
+					$_SESSION['usar_id'] = $row['user_id'];
+					$_SESSION['usar_name'] = $row['user_name'];
+					header("location:index.php");
+				}
+				else
+				{
+					$message = "<label>Wrong Password</label>";
+				}
+			}
+			else
+			{
+				$message = "<label>Your account is disabled, Contact Master</label>";
+			}
+		}
+	}
+	else
+	{
+		$message = "<label>Wrong Email Address</labe>";
+	}
 }
 
 ?>

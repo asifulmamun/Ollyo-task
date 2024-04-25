@@ -10,7 +10,7 @@ $username = "asifulmamun";
 $password = "#Asiful1998";
 $database = "inventory";
 
-$connect = new mysqli($servername, $username, $password, $database);
+$connect = mysqli_connect($servername, $username, $password, $database);
 if ($connect->connect_error) {
     die("Connection failed: " . $connect->connect_error);
 }

@@ -36,17 +36,21 @@ if(isset($_POST["login"]))
 
 	if($count > 0)
 	{
-		$result = $statement->fetchAll();
-		foreach($result as $row)
+		// $result = $statement->fetchAll();
+		// $result = $statement->fetch_all(MYSQLI_ASSOC);
+		// foreach($result as $row)
+		while ($row = $result->fetch_assoc())
+
 		{
 			if($row['user_status'] == 'Active')
 			{
 				if(password_verify($_POST["user_password"], $row["user_password"]))
 				{
 				
+					// echo $row['user_name'];
 					$_SESSION['type'] = $row['user_type'];
-					$_SESSION['usar_id'] = $row['user_id'];
-					$_SESSION['usar_name'] = $row['user_name'];
+					$_SESSION['user_id'] = $row['user_id'];
+					$_SESSION['user_name'] = $row['user_name'];
 					header("location:index.php");
 				}
 				else

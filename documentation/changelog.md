@@ -25,4 +25,6 @@
 --------- after 30 mins work then ready to for travel Dhaka not sure would it possible to complete thoses task or not -------
 
 ### Start again while traveling train
+- start 5:34pm at train
+- Fix: fix the header file user name, session name was spelling mistake for this reason session not set, and header greating name was the error.
 

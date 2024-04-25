@@ -166,10 +166,15 @@ function count_total_order_value($connect)
 	{
 		$query .= ' AND user_id = "'.$_SESSION["user_id"].'"';
 	}
-	$statement = $connect->prepare($query);
-	$statement->execute();
-	$result = $statement->get_result();
-	$result = $result->fetch_all(MYSQLI_ASSOC);
+	
+	$statement = $connect->query($query);
+	// $statement->execute();
+	// $result = mysqli_fetch_all($statement,MYSQLI_ASSOC);
+	// $result = $statement->fetchAll();
+	// $result = $result->fetch_all(MYSQLI_ASSOC);
+	$result = $statement->fetch_all(MYSQLI_ASSOC);
+    // $rowCount = $query->num_rows;
+	// return $rowCount;
 	foreach($result as $row)
 	{
 		return number_format($row['total_order_value'], 2);
@@ -187,10 +192,12 @@ function count_total_cash_order_value($connect)
 	{
 		$query .= ' AND user_id = "'.$_SESSION["user_id"].'"';
 	}
-	$statement = $connect->prepare($query);
-	$statement->execute();
-	$result = $statement->get_result();
-	$result = $result->fetch_all(MYSQLI_ASSOC);
+	$statement = $connect->query($query);
+	// $statement = $connect->prepare($query);
+	// $statement->execute();
+	// $result = $statement->get_result();
+	// $result = $result->fetch_all(MYSQLI_ASSOC);
+	$result = $statement->fetch_all(MYSQLI_ASSOC);
 	foreach($result as $row)
 	{
 		return number_format($row['total_order_value'], 2);
@@ -206,10 +213,11 @@ function count_total_credit_order_value($connect)
 	{
 		$query .= ' AND user_id = "'.$_SESSION["user_id"].'"';
 	}
-	$statement = $connect->prepare($query);
-	$statement->execute();
-	$result = $statement->get_result();
-	$result = $result->fetch_all(MYSQLI_ASSOC);
+	$statement = $connect->query($query);
+	// $statement->execute();
+	// $result = $statement->get_result();
+	// $result = $result->fetch_all(MYSQLI_ASSOC);
+	$result = $statement->fetch_all(MYSQLI_ASSOC);
 	foreach($result as $row)
 	{
 		return number_format($row['total_order_value'], 2);

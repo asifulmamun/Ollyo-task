@@ -27,4 +27,5 @@
 ### Start again while traveling train
 - start 5:34pm at train
 - Fix: fix the header file user name, session name was spelling mistake for this reason session not set, and header greating name was the error.
+- Fix: index page almost completed, showing all perfectly as known by me
 

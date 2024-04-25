@@ -120,40 +120,57 @@ function available_product_quantity($connect, $product_id)
 function count_total_user($connect)
 {
 	$query = "
-	SELECT * FROM user_details WHERE user_status='active'";
+	SELECT  COUNT(*) as count FROM user_details WHERE user_status='active'";
 	$statement = $connect->prepare($query);
 	$statement->execute();
-	return $statement->rowCount();
+	$result = $statement->get_result();
+	$row = $result->fetch_assoc();
+	$count = $row['count'];
+	return $count+1;
+	// return $statement->rowCount();
 }
 
 function count_total_category($connect)
 {
 	$query = "
-	SELECT * FROM category WHERE category_status='active'
+	SELECT  COUNT(*) FROM category WHERE category_status='active'
 	";
 	$statement = $connect->prepare($query);
 	$statement->execute();
-	return $statement->rowCount();
+	$result = $statement->get_result();
+	$row = $result->fetch_row();
+	$count = $row[0];
+	return $count;
+
+	// return $statement->rowCount();
 }
 
 function count_total_brand($connect)
 {
 	$query = "
-	SELECT * FROM brand WHERE brand_status='active'
+	SELECT COUNT(*) as count FROM brand WHERE brand_status='active'
 	";
 	$statement = $connect->prepare($query);
 	$statement->execute();
-	return $statement->rowCount();
+	$result = $statement->get_result();
+	$row = $result->fetch_assoc();
+	$count = $row['count'];
+	return $count+1;
+	// return $statement->rowCount();
 }
 
 function count_total_product($connect)
 {
 	$query = "
-	SELECT * FROM product WHERE product_status='active'
+	SELECT COUNT(*) as count FROM product WHERE product_status='active'
 	";
 	$statement = $connect->prepare($query);
 	$statement->execute();
-	return $statement->rowCount();
+	$result = $statement->get_result();
+	$row = $result->fetch_assoc();
+	$count = $row['count'];
+	return $count+1;
+	// return $statement->rowCount();
 }
 
 function count_total_order_value($connect)
@@ -235,9 +252,12 @@ function get_user_wise_total_order($connect)
 	INNER JOIN user_details ON user_details.user_id = inventory_order.user_id 
 	WHERE inventory_order.inventory_order_status = "active" GROUP BY inventory_order.user_id
 	';
-	$statement = $connect->prepare($query);
-	$statement->execute();
-	$result = $statement->fetchAll();
+	$statement = $connect->query($query);
+	// $statement = $connect->prepare($query);
+	// $statement->execute();
+	// $result = $statement->fetchAll();
+	$result = $statement->fetch_all(MYSQLI_ASSOC);
+	
 	$output = '
 	<div class="table-responsive">
 		<table class="table table-bordered table-striped">

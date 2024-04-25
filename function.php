@@ -43,7 +43,9 @@ function get_user_name($connect, $user_id)
 	";
 	$statement = $connect->prepare($query);
 	$statement->execute();
-	$result = $statement->fetchAll();
+	$result = $statement->get_result();
+	$result = $result->fetch_all(MYSQLI_ASSOC);
+	// $result = $statement->fetchAll();
 	foreach($result as $row)
 	{
 		return $row['user_name'];

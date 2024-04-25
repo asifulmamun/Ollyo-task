@@ -36,6 +36,7 @@
 - change the user name some of user whose name was only 0
 - fix: index page order values users,
     => Total credit order column name was wrong
-
+- CDN to locally serve ```<link rel="stylesheet" href="css/bootstrap-select.min.css"><script src="js/bootstrap-select.min.js"></script>```
+- try: order_fetch.php direct data found with dummy, without request by datatable
 
 

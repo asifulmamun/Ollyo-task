@@ -14,7 +14,7 @@
 		<script src="js/bootstrap.min.js"></script>
 	</head>
 	<body>
-		<br />
+		<!-- <br /> -->
 		<div class="container">
 			<h2 align="center">Inventory Management System</h2>
 

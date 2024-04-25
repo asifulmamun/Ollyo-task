@@ -11,42 +11,48 @@ $query = '';
 $output = array();
 
 $query .= "
-	SELECT * FROM inventory_order WHERE 
+	SELECT * FROM inventory_order 
 ";
 
-if($_SESSION['type'] == 'user')
-{
-	$query .= 'user_id = "'.$_SESSION["user_id"].'" AND ';
-}
+// $query .= "
+// 	SELECT * FROM inventory_order WHERE 
+// ";
 
-if(isset($_POST["search"]["value"]))
-{
-	$query .= '(inventory_order_id LIKE "'.$_POST["search"]["value"].'%" ';
-	$query .= 'OR inventory_order_name LIKE "'.$_POST["search"]["value"].'%" ';
-	$query .= 'OR inventory_order_total LIKE "'.$_POST["search"]["value"].'%" ';
-	$query .= 'OR inventory_order_status LIKE "'.$_POST["search"]["value"].'%" ';
-	$query .= 'OR inventory_order_date LIKE "'.$_POST["search"]["value"].'%") ';
-}
+// if($_SESSION['type'] == 'user')
+// {
+// 	$query .= 'user_id = "'.$_SESSION["user_id"].'" AND ';
+// }
 
-if(isset($_POST["order"]))
-{
-	$query .= 'ORDER BY '.$_POST['order']['0']['column'].' '.$_POST['order']['0']['dir'].' ';
-}
-else
-{
-	$query .= 'ORDER BY inventory_order_id DESC ';
-}
+// if(isset($_POST["search"]["value"]))
+// {
+// 	$query .= '(inventory_order_id LIKE "'.$_POST["search"]["value"].'%" ';
+// 	$query .= 'OR inventory_order_name LIKE "'.$_POST["search"]["value"].'%" ';
+// 	$query .= 'OR inventory_order_total LIKE "'.$_POST["search"]["value"].'%" ';
+// 	$query .= 'OR inventory_order_status LIKE "'.$_POST["search"]["value"].'%" ';
+// 	$query .= 'OR inventory_order_date LIKE "'.$_POST["search"]["value"].'%") ';
+// }
 
-if($_POST["length"] != -1)
-{
-	$query .= 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
-}
+// if(isset($_POST["order"]))
+// {
+// 	$query .= 'ORDER BY '.$_POST['order']['0']['column'].' '.$_POST['order']['0']['dir'].' ';
+// }
+// else
+// {
+// 	$query .= 'ORDER BY inventory_order_id DESC ';
+// }
+
+// if($_POST["length"] != -1)
+// {
+// 	$query .= 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
+// }
 
 $statement = $connect->prepare($query);
 $statement->execute();
-$result = $statement->fetchAll();
+$result = $statement->get_result();
+$result = $result->fetch_all(MYSQLI_ASSOC);
+// $result = $statement->fetchAll();
 $data = array();
-$filtered_rows = $statement->rowCount();
+// $filtered_rows = $statement->rowCount();
 foreach($result as $row)
 {
 	$payment_status = '';
@@ -88,14 +94,20 @@ foreach($result as $row)
 
 function get_total_all_records($connect)
 {
-	$statement = $connect->prepare("SELECT * FROM inventory_order");
+	$statement = $connect->prepare("SELECT COUNT(*) as count FROM inventory_order");
 	$statement->execute();
-	return $statement->rowCount();
+	$result = $statement->get_result();
+	$row = $result->fetch_assoc();
+	$count = $row['count'];
+	return $count+1;
+	// return $statement->rowCount();
 }
 
 $output = array(
-	"draw"    			=> 	intval($_POST["draw"]),
-	"recordsTotal"  	=>  $filtered_rows,
+	"draw"    			=> 	999,
+	// "draw"    			=> 	intval($_POST["draw"]),
+	"recordsTotal"  	=>  99,
+	// "recordsTotal"  	=>  $filtered_rows,
 	"recordsFiltered" 	=> 	get_total_all_records($connect),
 	"data"    			=> 	$data
 );	

@@ -159,7 +159,7 @@ function count_total_product($connect)
 function count_total_order_value($connect)
 {
 	$query = "
-	SELECT sum(inventory_order_total) as total_order_value FROM inventory_order 
+	SELECT sum(inventory_order_total)  as total_order_value FROM inventory_order 
 	WHERE inventory_order_status='active'
 	";
 	if($_SESSION['type'] == 'user')
@@ -168,7 +168,8 @@ function count_total_order_value($connect)
 	}
 	$statement = $connect->prepare($query);
 	$statement->execute();
-	$result = $statement->fetchAll();
+	$result = $statement->get_result();
+	$result = $result->fetch_all(MYSQLI_ASSOC);
 	foreach($result as $row)
 	{
 		return number_format($row['total_order_value'], 2);
@@ -188,7 +189,8 @@ function count_total_cash_order_value($connect)
 	}
 	$statement = $connect->prepare($query);
 	$statement->execute();
-	$result = $statement->fetchAll();
+	$result = $statement->get_result();
+	$result = $result->fetch_all(MYSQLI_ASSOC);
 	foreach($result as $row)
 	{
 		return number_format($row['total_order_value'], 2);
@@ -206,7 +208,8 @@ function count_total_credit_order_value($connect)
 	}
 	$statement = $connect->prepare($query);
 	$statement->execute();
-	$result = $statement->fetchAll();
+	$result = $statement->get_result();
+	$result = $result->fetch_all(MYSQLI_ASSOC);
 	foreach($result as $row)
 	{
 		return number_format($row['total_order_value'], 2);

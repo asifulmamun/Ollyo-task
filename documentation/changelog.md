@@ -33,6 +33,9 @@
 - Domain addon to a hosting and subdomain create https://olly.asifulmamun.info
 - Database connection-make backup file for git ignore and the main connection file added to gitignore for avoid the hosting conflict
 - .gitignore file added
+- change the user name some of user whose name was only 0
+- fix: index page order values users,
+    => Total credit order column name was wrong
 
 
 

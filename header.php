@@ -39,7 +39,7 @@
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="label label-pill label-danger count"></span> <?php echo $_SESSION["user_name"]; ?></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="label label-pill label-danger count"></span> <?php echo (isset($_SESSION["user_name"]))? $_SESSION["user_name"] : 'guest'; ?></a>
 							<ul class="dropdown-menu">
 								<li><a href="profile.php">Profile</a></li>
 								<li><a href="logout.php">Logout</a></li>

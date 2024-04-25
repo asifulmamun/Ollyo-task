@@ -12,47 +12,61 @@ $message = '';
 
 if(isset($_POST["login"]))
 {
-	$query = "
-	SELECT * FROM user_details 
-		WHERE user_email = :user_email
-	";
+	// $query = "
+	// SELECT * FROM user_details 
+	// 	WHERE user_email = :user_email
+	// ";
+	// $statement = $connect->prepare($query);
+	// $statement->execute(
+	// 	array(
+	// 			'user_email'	=>	$_POST["user_email"]
+	// 		)
+	// );
+
+	$query = "SELECT * FROM user_details WHERE user_email = ?";
 	$statement = $connect->prepare($query);
-	$statement->execute(
-		array(
-				'user_email'	=>	$_POST["user_email"]
-			)
-	);
-	$count = $statement->rowCount();
-	if($count > 0)
-	{
-		$result = $statement->fetchAll();
-		foreach($result as $row)
-		{
-			if($row['user_status'] == 'Active')
-			{
-				if(password_verify($_POST["user_password"], $row["user_password"]))
-				{
+	$statement->bind_param("s", $_POST["user_email"]);
+	$statement->execute();
+	$result = $statement->get_result();
+	$count = $result->num_rows;
+
+	
+	
+	// $count = $statement->rowCount();
+	echo $count;
+
+
+
+	// if($count > 0)
+	// {
+	// 	$result = $statement->fetchAll();
+	// 	foreach($result as $row)
+	// 	{
+	// 		if($row['user_status'] == 'Active')
+	// 		{
+	// 			if(password_verify($_POST["user_password"], $row["user_password"]))
+	// 			{
 				
-					$_SESSION['type'] = $row['user_type'];
-					$_SESSION['usar_id'] = $row['user_id'];
-					$_SESSION['usar_name'] = $row['user_name'];
-					header("location:index.php");
-				}
-				else
-				{
-					$message = "<label>Wrong Password</label>";
-				}
-			}
-			else
-			{
-				$message = "<label>Your account is disabled, Contact Master</label>";
-			}
-		}
-	}
-	else
-	{
-		$message = "<label>Wrong Email Address</labe>";
-	}
+	// 				$_SESSION['type'] = $row['user_type'];
+	// 				$_SESSION['usar_id'] = $row['user_id'];
+	// 				$_SESSION['usar_name'] = $row['user_name'];
+	// 				header("location:index.php");
+	// 			}
+	// 			else
+	// 			{
+	// 				$message = "<label>Wrong Password</label>";
+	// 			}
+	// 		}
+	// 		else
+	// 		{
+	// 			$message = "<label>Your account is disabled, Contact Master</label>";
+	// 		}
+	// 	}
+	// }
+	// else
+	// {
+	// 	$message = "<label>Wrong Email Address</labe>";
+	// }
 }
 
 ?>

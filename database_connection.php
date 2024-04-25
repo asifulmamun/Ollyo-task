@@ -22,5 +22,7 @@ session_start();
 // Register session variables (deprecated)
 // session_register('type');
 // session_register('user_id');
-$_SESSION['type'] = '';
-$_SESSION['user_id'] = '';
+
+// commented for login problem, it will giving permission without login
+// $_SESSION['type'] = '';
+// $_SESSION['user_id'] = '';
